@@ -1,7 +1,7 @@
 import { JaaSMeeting, JitsiMeeting } from '@jitsi/react-sdk';
 import React, { useRef, useState } from 'react';
 
-const App = () => {
+const Home = () => {
     const apiRef = useRef();
     const [logItems, updateLog] = useState([]);
     const [showNew, toggleShowNew] = useState(false);
@@ -40,16 +40,9 @@ const App = () => {
                 condition(participant)
             );
             updateKnockingParticipants((participants) =>
-                participants.filter((item) => item.id === participant.id)
+                participants.filter((item) => item.id !== participant.id)
             );
         });
-    };
-
-    const handleJitsiIFrameRef1 = (iframeRef) => {
-        iframeRef.style.border = '10px solid #3d3d3d';
-        iframeRef.style.background = '#3d3d3d';
-        iframeRef.style.height = '600px';
-        iframeRef.style.marginBottom = '20px';
     };
 
     const handleApiReady = (apiObj) => {
@@ -67,13 +60,11 @@ const App = () => {
     };
 
     const handleReadyToClose = () => {
-        /* eslint-disable-next-line no-alert */
         alert('Ready to close...');
     };
 
     const generateRoomName = () => `${Math.random() * 100}-${Date.now()}`;
 
-    // Adjusted: Only show a single video instance based on `showNew`
     const renderVideoInstance = () => {
         if (showNew) {
             return (
@@ -98,6 +89,8 @@ const App = () => {
                         iframeRef.style.height = '600px';
                         iframeRef.style.marginBottom = '20px';
                     }}
+                    onApiReady={handleApiReady}
+                    onReadyToClose={handleReadyToClose}
                 />
             );
         }
@@ -125,17 +118,18 @@ const App = () => {
         </div>
     );
 
-    const renderLog = () => logItems.map((item, index) => (
-        <div
-            style={{
-                fontFamily: 'monospace',
-                padding: '5px',
-            }}
-            key={index}
-        >
-            {item}
-        </div>
-    ));
+    const renderLog = () =>
+        logItems.map((item, index) => (
+            <div
+                style={{
+                    fontFamily: 'monospace',
+                    padding: '5px',
+                }}
+                key={index}
+            >
+                {item}
+            </div>
+        ));
 
     return (
         <>
@@ -147,4 +141,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Home;
