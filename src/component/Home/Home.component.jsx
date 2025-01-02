@@ -1,14 +1,12 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import './Home.component.css'; // Ensure it's linked to the CSS file
 import Emailjs from 'emailjs-com';
 
 const Home = () => {
-    // Create a ref for the form element
-    const formRef = useRef(null);
+    const sendEmail = (e) => {
+        e.preventDefault();
 
-    // Function to send email using EmailJS
-    const sendEmail = (form) => {
-        Emailjs.sendForm('service_0v9go2o', 'template_idle10o', form, '17gSsOM0z8DQNMZQ_')
+        Emailjs.sendForm('service_0v9go2o', 'template_w43y2lk', e.target, 'Waf09zcqlehx4xfa6')
             .then((result) => {
                 console.log(result.text);
                 alert('Message sent successfully!');
@@ -17,39 +15,17 @@ const Home = () => {
                 alert('Failed to send message, please try again.');
             });
 
-        // Reset the form after sending
-        form.reset();
-    };
-
-    // Handle form submission
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        sendEmail(e.target);
-    };
-
-    // Handle key down events in the textarea
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            // Ensure the form ref is available before sending
-            if (formRef.current) {
-                sendEmail(formRef.current);
-            }
-        }
+        e.target.reset();
     };
 
     return (
         <div>
-      {/* Header */}
+            {/* Header */}
             <header>
-                <div className="logo-container">
-                    <img src="telemedicine.png" alt="HOPT Logo" className="logo" /> {/* Add your logo image */}
-                </div>
                 <h1>𝑯𝑶𝑷𝑻 𝒄𝒂𝒓𝒆𝒔 𝒇𝒐𝒓 𝒚𝒐𝒖 - 𝒚𝒐𝒖 𝒄𝒂𝒓𝒆 𝒇𝒐𝒓 𝒑𝒂𝒕𝒊𝒆𝒏𝒕𝒔!</h1>
                 <nav>
-                    <a href="https://hoangphucthanh.vn/" target="_blank" rel="noopener noreferrer" className="logo-link">HOPT</a>
-                    <a href="#products">Products</a>
                     <a href="#features">Features</a>
+                    <a href="#products">Products</a>
                     <a href="#contact">Contact</a>
                 </nav>
             </header>
@@ -88,16 +64,17 @@ const Home = () => {
 
             {/* Contact & Footer Section */}
             <div className="contact-footer">
-            {/* Contact Section */}
-                <section id="contact" className="contact">
+                {/* Contact Section */}
+                <div className="contact">
                     <h3>Contact Us</h3>
-                    <form>
-                    <input type="text" placeholder="Your Name" required />
-                    <input type="email" placeholder="Your Email" required />
-                    <textarea placeholder="Your Message" required></textarea>
-                    <button type="submit" className="cta-button">Send Message</button>
+                    <form onSubmit={sendEmail}>
+                        <input type="text" name="name" placeholder="Your Name" required />
+                        <input type="email" name="email" placeholder="Your Email" required />
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <button type="submit" className="cta-button">Send Message</button>
                     </form>
-                </section>
+                </div>
+
                 {/* Footer Section */}
                 <div className="footer">
                     <div className="footer-info">

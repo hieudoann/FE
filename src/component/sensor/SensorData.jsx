@@ -28,22 +28,22 @@ const SensorData = () => {
             <div className="sensor-data-grid">
                 <div className="sensor-data-item">
                     <p className="label">Temperature</p>
-                    <p className="value">{data.nhiet_do1 || 'N/A'}</p>
+                    <p className="value">{data.nhiet_do || 'N/A'}</p>
                     <p className="unit">°C</p>
                 </div>
                 <div className="sensor-data-item">
                     <p className="label">Humidity</p>
-                    <p className="value">{data.do_am1 || 'N/A'}</p>
+                    <p className="value">{data.do_am || 'N/A'}</p>
                     <p className="unit">%</p>
                 </div>
                 <div className="sensor-data-item">
                     <p className="label">Air Quality</p>
-                    <p className="value">{data.air_quality || 'N/A'}</p>
+                    <p className="value">{data.cl_kk || 'N/A'}</p>
                     <p className="unit">ppm</p>
                 </div>
                 <div className="sensor-data-item">
                     <p className="label">PM Fine dust</p>
-                    <p className="value">{data.pm_fine_dust || 'N/A'}</p>
+                    <p className="value">{data.bui_min || 'N/A'}</p>
                     <p className="unit">µg/m³</p>
                 </div>
                 <div className="sensor-data-item">
@@ -56,7 +56,7 @@ const SensorData = () => {
                 </div>
                 <div className="sensor-data-item">
                     <p className="label">Light Toggle Count</p>
-                    <p className="value">{data.lightToggleCount || 'N/A'}</p>
+                    <p className="value">{data.lightToggleCount || '0'}</p>
                 </div>
                 <div className="sensor-data-item">
                     <p className="label">Operation Flag</p>
