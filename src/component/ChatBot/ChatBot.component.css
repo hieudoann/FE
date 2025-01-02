@@ -1,7 +1,5 @@
-/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-/* General Styles */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,10 +9,8 @@
 
 body {
   background-color: #f7f7f7;
-  font-family: 'Roboto', sans-serif;
 }
 
-/* ChatBot-specific styles */
 .chat-window {
   position: fixed;
   bottom: 90px;
@@ -25,11 +21,11 @@ body {
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-  display: none; /* Initially hidden */
+  display: flex;
   flex-direction: column;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
-  z-index: 999; /* Ensure it's above other elements except the bubble */
+  z-index: 999;
 }
 
 .chat-window.open {
@@ -50,18 +46,15 @@ body {
 .chat-history {
   flex: 1;
   padding: 16px;
-  overflow-y: auto; /* Enable vertical scrollbar */
+  overflow-y: auto;
   background-color: #f9f9f9;
   font-size: 14px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Custom Scrollbar Styles */
 .chat-history::-webkit-scrollbar {
   width: 8px;
-}
-
-.chat-history::-webkit-scrollbar-track {
-  background: #f1f1f1;
 }
 
 .chat-history::-webkit-scrollbar-thumb {
@@ -73,15 +66,47 @@ body {
   background: #a8a8a8;
 }
 
-/* Chat Input Section */
-.chat-window .chat-input {
+.message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  max-width: 70%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 12px;
+}
+
+.user-message {
+  background-color: #4A90E2;
+  color: white;
+  align-self: flex-end;
+  border-radius: 12px 12px 0 12px;
+}
+
+.bot-message {
+  background-color: #E5E5EA;
+  color: black;
+  align-self: flex-start;
+  border-radius: 12px 12px 12px 0;
+}
+
+.message-avatar {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.message-text {
+  word-wrap: break-word;
+}
+
+.chat-input {
   display: flex;
   padding: 12px;
   border-top: 1px solid #ddd;
   background-color: #fff;
 }
 
-.chat-window .chat-input input {
+.chat-input input {
   flex: 1;
   padding: 12px 16px;
   border: 1px solid #ccc;
@@ -91,11 +116,11 @@ body {
   font-size: 16px;
 }
 
-.chat-window .chat-input input:focus {
+.chat-input input:focus {
   border-color: #4A90E2;
 }
 
-.chat-window .chat-input button {
+.chat-input button {
   margin-left: 10px;
   padding: 12px 20px;
   background-color: #4A90E2;
@@ -107,11 +132,10 @@ body {
   font-size: 16px;
 }
 
-.chat-window .chat-input button:hover {
+.chat-input button:hover {
   background-color: #357ABD;
 }
 
-/* Clear Chat Button */
 .clear-chat {
   text-align: center;
   padding: 12px;
@@ -126,7 +150,6 @@ body {
   background-color: #e0e0e0;
 }
 
-/* Chat Bubble Button */
 .chat-bubble {
   position: fixed;
   bottom: 20px;
@@ -141,7 +164,8 @@ body {
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s, transform 0.3s;
-  z-index: 1000; /* Ensure it's above other elements */
+  z-index: 1000;
+  animation: bounce 2s infinite;
 }
 
 .chat-bubble:hover {
@@ -149,40 +173,39 @@ body {
   transform: scale(1.1);
 }
 
-.chat-bubble svg {
-  color: white;
-  font-size: 28px;
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
-/* Message Styles */
-.message {
-  max-width: 70%;
-  padding: 12px;
-  font-size: 15px;
-  border-radius: 12px;
-  margin-bottom: 10px;
+.loading-indicator {
   display: flex;
+  justify-content: center;
   align-items: center;
+  margin-top: 10px;
 }
 
-.user-message {
-  background-color: #4A90E2; /* User message color */
-  color: white;
-  align-self: flex-end;
-  border-radius: 12px 12px 0 12px;
+.loading-indicator .dot {
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  background-color: #4A90E2;
+  border-radius: 50%;
+  animation: blink 1.2s infinite;
 }
 
-.bot-message {
-  background-color: #E5E5EA; /* Bot message color */
-  color: black;
-  align-self: flex-start;
-  border-radius: 12px 12px 12px 0;
-}
-
-.clear-chat {
-  /* Ensuring no conflicts with global .clear-chat */
-}
-
-.chat-history {
-  /* Ensuring no conflicts with global .chat-history */
+@keyframes blink {
+  0%, 80%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
 }
