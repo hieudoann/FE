@@ -16,7 +16,7 @@ const ChatBot = () => {
   };
 
   // Initialize your Gemini API
-  const genAI = new GoogleGenerativeAI("AIzaSyBW0wuEml-AWB_JGj2xXAbWDH0TQazBC5A");
+  const genAI = new GoogleGenerativeAI("AIzaSyAvJC-p9zRBhepHIikaR9_vjk0poksGLfg");
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   // Handle user input
