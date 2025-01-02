@@ -6,7 +6,7 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 import 'leaflet-control-geocoder';
 import { useNavigate } from 'react-router-dom';
 import './Map.component.css';
-
+// import Cesium from "cesium";
 const Map = () => {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
