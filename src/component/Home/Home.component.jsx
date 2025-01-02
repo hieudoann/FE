@@ -40,12 +40,16 @@ const Home = () => {
 
     return (
         <div>
-            {/* Header */}
+      {/* Header */}
             <header>
+                <div className="logo-container">
+                    <img src="telemedicine.png" alt="HOPT Logo" className="logo" /> {/* Add your logo image */}
+                </div>
                 <h1>𝑯𝑶𝑷𝑻 𝒄𝒂𝒓𝒆𝒔 𝒇𝒐𝒓 𝒚𝒐𝒖 - 𝒚𝒐𝒖 𝒄𝒂𝒓𝒆 𝒇𝒐𝒓 𝒑𝒂𝒕𝒊𝒆𝒏𝒕𝒔!</h1>
                 <nav>
-                    <a href="#features">Features</a>
+                    <a href="https://hoangphucthanh.vn/" target="_blank" rel="noopener noreferrer" className="logo-link">HOPT</a>
                     <a href="#products">Products</a>
+                    <a href="#features">Features</a>
                     <a href="#contact">Contact</a>
                 </nav>
             </header>
@@ -84,23 +88,16 @@ const Home = () => {
 
             {/* Contact & Footer Section */}
             <div className="contact-footer">
-                {/* Contact Section */}
-                <div className="contact">
+            {/* Contact Section */}
+                <section id="contact" className="contact">
                     <h3>Contact Us</h3>
-                    {/* Attach the ref to the form element */}
-                    <form ref={formRef} onSubmit={handleSubmit}>
-                        <input type="text" name="name" placeholder="Your Name" required />
-                        <input type="email" name="email" placeholder="Your Email" required />
-                        <textarea
-                            name="message"
-                            placeholder="Your Message"
-                            required
-                            onKeyDown={handleKeyDown}
-                        ></textarea>
-                        <button type="submit" className="cta-button">Send Message</button>
+                    <form>
+                    <input type="text" placeholder="Your Name" required />
+                    <input type="email" placeholder="Your Email" required />
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" className="cta-button">Send Message</button>
                     </form>
-                </div>
-
+                </section>
                 {/* Footer Section */}
                 <div className="footer">
                     <div className="footer-info">
