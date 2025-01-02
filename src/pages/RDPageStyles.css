@@ -1,0 +1,49 @@
+.rd-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.rd-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.rd-header h2 {
+    font-size: 2rem;
+    color: #0056b3;
+}
+
+.rd-header p {
+    font-size: 1.2rem;
+    color: #000000;
+}
+
+.rd-section, .rd-projects, .rd-future {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+}
+
+.rd-section h3, .rd-projects h3, .rd-future h3 {
+    font-size: 1.5rem;
+    color: #0056b3;
+}
+
+.rd-section p, .rd-future p, .rd-projects ul {
+    font-size: 1rem;
+    color: #000000;
+    line-height: 1.6;
+}
+
+.rd-projects ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.rd-projects li {
+    margin-bottom: 8px;
+}

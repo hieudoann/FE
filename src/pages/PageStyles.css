@@ -1,0 +1,86 @@
+.page-container {
+    padding: 40px;
+    text-align: center;
+}
+
+.page-container h2 {
+    font-size: 2.5rem;
+    color: #1e90ff;
+    margin-bottom: 20px;
+}
+
+.page-container p {
+    font-size: 1.2rem;
+    color: #333;
+}
+/* Reset một số thuộc tính mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Cài đặt nền và kiểu chữ cho toàn trang */
+body {
+    background-color: #b3ddff; /* Màu nền sáng */
+    font-family: 'Arial', sans-serif; /* Phông chữ dễ đọc */
+    color: #333; /* Màu chữ chính */
+}
+
+/* Container chính cho trang */
+.page-container {
+    max-width: 1000px; /* Chiều rộng tối đa */
+    margin: 40px auto; /* Tự động căn giữa */
+    padding: 20px; /* Padding cho không gian bên trong */
+    background-color: #fff; /* Nền trắng cho nội dung */
+    border-radius: 10px; /* Bo tròn góc */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho chiều sâu */
+}
+
+/* Tiêu đề trang */
+h2 {
+    font-size: 2.5em; /* Kích thước chữ lớn */
+    margin-bottom: 20px; /* Khoảng cách phía dưới tiêu đề */
+    color: #007bff; /* Màu xanh dương cho tiêu đề */
+    text-align: center; /* Căn giữa tiêu đề */
+}
+
+/* Đoạn văn giới thiệu */
+p {
+    font-size: 1.2em; /* Kích thước chữ cho đoạn văn */
+    line-height: 1.6; /* Khoảng cách giữa các dòng */
+    margin-bottom: 40px; /* Khoảng cách dưới đoạn văn */
+    text-align: center; /* Căn giữa đoạn văn */
+    color: #666; /* Màu chữ nhạt hơn cho văn bản */
+}
+
+/* Container cho các giải pháp */
+.solutions-container {
+    display: flex; /* Sử dụng Flexbox để sắp xếp */
+    flex-wrap: wrap; /* Cho phép bọc nếu không đủ chỗ */
+    justify-content: space-between; /* Căn giữa các thẻ card */
+    gap: 20px; /* Khoảng cách giữa các thẻ card */
+}
+
+/* Thẻ card cho từng giải pháp */
+.solution-card {
+    background-color: #f9f9f9; /* Màu nền thẻ card */
+    border-radius: 8px; /* Bo tròn góc thẻ card */
+    padding: 20px; /* Padding bên trong thẻ card */
+    flex: 1; /* Để thẻ card tự động điều chỉnh kích thước */
+    min-width: 300px; /* Chiều rộng tối thiểu cho thẻ card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng cho thẻ card */
+}
+
+/* Tiêu đề cho từng thẻ card */
+.solution-card h3 {
+    color: #007bff; /* Màu tiêu đề thẻ card */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+/* Đoạn văn trong thẻ card */
+.solution-card p {
+    font-size: 1em; /* Kích thước chữ cho văn bản thẻ card */
+    color: #555; /* Màu chữ nhạt hơn */
+    line-height: 1.4; /* Khoảng cách giữa các dòng */
+}

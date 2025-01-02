@@ -1,0 +1,33 @@
+/* Container Styles */
+.toggle-button-container {
+    position: fixed;
+    bottom: 0; /* Đặt nút sát cạnh dưới */
+    left: 50%;
+    transform: translateX(-50%); /* Căn giữa các nút */
+    display: flex;
+    flex-direction: row; /* Sắp xếp các nút theo hàng ngang */
+    gap: 15px; /* Khoảng cách giữa các nút */
+    z-index: 1000; /* Đảm bảo các nút nằm trên mọi phần tử khác */
+    padding: 5px 0; /* Giảm khoảng cách padding để sát đáy */
+    background-color: rgba(255, 255, 255, 0.8); /* Tùy chọn thêm nền mờ */
+}
+
+/* Nút khi cuộn trang */
+.toggle-button-container.scrolled {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Thêm hiệu ứng đổ bóng */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .toggle-button-container {
+        flex-direction: column; /* Các nút xếp chồng khi trên màn hình nhỏ */
+        bottom: 0; /* Đảm bảo sát đáy trên màn hình nhỏ */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .toggle-button {
+        width: 100%;
+        padding: 12px 0;
+        margin-bottom: 5px; /* Khoảng cách nhỏ giữa các nút */
+    }
+}

@@ -1,0 +1,14 @@
+/* src/pages/SolutionStyles.css */
+.solution-page {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.solution-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin-top: 15px;
+}

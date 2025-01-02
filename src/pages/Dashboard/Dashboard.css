@@ -1,0 +1,87 @@
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #e9edf0;
+}
+
+/* Dashboard Container */
+.dashboard {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 20px auto;
+  transition: all 0.3s ease-in-out;
+}
+
+.dashboard:hover {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-title {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* No Data State */
+.no-data {
+  text-align: center;
+  font-size: 18px;
+  color: #999;
+}
+
+/* Gauge Container */
+.gauge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Individual Gauge Card */
+.gauge-card {
+  width: 280px;
+  background: linear-gradient(135deg, #f0f4f8, #d9e6f2);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+}
+
+.gauge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Gauge Title */
+.gauge-title {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .gauge-card {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-title {
+    font-size: 20px;
+  }
+
+  .gauge-title {
+    font-size: 14px;
+  }
+}

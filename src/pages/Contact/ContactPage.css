@@ -1,0 +1,111 @@
+/* Thiết lập layout và căn chỉnh */
+.contact-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Arial', sans-serif;
+    color: #000000;
+    line-height: 1.6;
+}
+
+/* Tiêu đề trang */
+h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+/* Đoạn văn giới thiệu */
+.intro-text {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #000000;
+}
+
+/* Thiết kế phần thông tin liên hệ và form */
+.contact-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* Thông tin liên hệ */
+.contact-info {
+    flex: 1;
+    font-size: 1em;
+    color: #000000 !important;
+    
+}
+
+.contact-info p {
+    display: flex;
+    align-items: flex-start;
+    margin: 8px 0;
+    
+}
+.contact-info h3 {
+    margin-bottom: 10px;
+    color: #0056b3;
+}
+/* Form liên hệ */
+.contact-form {
+    flex: 1;
+}
+
+.contact-form h3 {
+    margin-bottom: 5px;
+    color: #0056b3;
+}
+
+/* Các trường trong form */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 1em;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 80%; /* Điều chỉnh chiều rộng cho nhỏ lại */
+    padding: 8px; /* Giảm padding để trường nhập nhỏ hơn */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em; /* Giảm kích thước font */
+    transition: border-color 0.3s;
+    resize: none; /* Ngăn không cho người dùng thay đổi kích thước */
+}
+
+.form-group textarea {
+    height: 120px; /* Giảm chiều cao của ô tin nhắn */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+}
+
+/* Nút gửi */
+.submit-button {
+    display: inline-block;
+    padding: 10px 25px; /* Giảm padding để nút nhỏ hơn */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em; /* Giảm kích thước chữ */
+    transition: background-color 0.3s;
+    margin-top: 1px; /* Khoảng cách giữa nút gửi và ô tin nhắn */
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}

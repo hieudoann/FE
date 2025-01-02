@@ -1,0 +1,69 @@
+{
+  "Patients": {
+    "Patient": [
+      {
+        "PatientID": "13254",
+        "TenBN": "Nguyễn A",
+        "Gioitinh": "Nam",
+        "Ngaysinh": "1/2/2001",
+        "Ngaythamkham": "10/10/2024"
+      },
+      {
+        "PatientID": "15324",
+        "TenBN": "Trần B",
+        "Gioitinh": "Nam",
+        "Ngaysinh": "23/2/2001",
+        "Ngaythamkham": "10/10/2024"
+      },
+      {
+        "PatientID": "24315",
+        "TenBN": "Nguyễn Thị C",
+        "Gioitinh": "Nữ",
+        "Ngaysinh": "3/5/2002",
+        "Ngaythamkham": "11/10/2024"
+      },
+      {
+        "PatientID": "25413",
+        "TenBN": "Phạm D",
+        "Gioitinh": "Nữ",
+        "Ngaysinh": "4/7/2003",
+        "Ngaythamkham": "9/10/2024"
+      },
+      {
+        "PatientID": "32415",
+        "TenBN": "Nguyễn Nam F",
+        "Gioitinh": "Nam",
+        "Ngaysinh": "7/8/2005",
+        "Ngaythamkham": "12/10/2024"
+      },
+      {
+        "PatientID": "51324",
+        "TenBN": "Hoàng G",
+        "Gioitinh": "Nam",
+        "Ngaysinh": "5/2/2006",
+        "Ngaythamkham": "10/10/2024"
+      },
+      {
+        "PatientID": "52314",
+        "TenBN": "Trần Khánh H",
+        "Gioitinh": "Nữ",
+        "Ngaysinh": "1/2/2001",
+        "Ngaythamkham": "10/10/2024"
+      },
+      {
+        "PatientID": "52431",
+        "TenBN": "Võ Hoàng Y",
+        "Gioitinh": "Nữ",
+        "Ngaysinh": "2/2/2006",
+        "Ngaythamkham": "5/10/2024"
+      },
+      {
+        "PatientID": "53412",
+        "TenBN": "Khánh K",
+        "Gioitinh": "Nam",
+        "Ngaysinh": "1/8/2002",
+        "Ngaythamkham": "10/10/2024"
+      }
+    ]
+  }
+}

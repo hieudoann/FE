@@ -1,0 +1,188 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* General Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f7f7f7;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* ChatBot-specific styles */
+.chat-window {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 350px;
+  height: 500px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  display: none; /* Initially hidden */
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  z-index: 999; /* Ensure it's above other elements except the bubble */
+}
+
+.chat-window.open {
+  display: flex;
+}
+
+.chat-window header {
+  background-color: #4A90E2;
+  color: white;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 500;
+  border-bottom: 1px solid #ddd;
+  border-radius: 12px 12px 0 0;
+}
+
+.chat-history {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto; /* Enable vertical scrollbar */
+  background-color: #f9f9f9;
+  font-size: 14px;
+}
+
+/* Custom Scrollbar Styles */
+.chat-history::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.chat-history::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Chat Input Section */
+.chat-window .chat-input {
+  display: flex;
+  padding: 12px;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.chat-window .chat-input input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  transition: border 0.3s;
+  font-size: 16px;
+}
+
+.chat-window .chat-input input:focus {
+  border-color: #4A90E2;
+}
+
+.chat-window .chat-input button {
+  margin-left: 10px;
+  padding: 12px 20px;
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.chat-window .chat-input button:hover {
+  background-color: #357ABD;
+}
+
+/* Clear Chat Button */
+.clear-chat {
+  text-align: center;
+  padding: 12px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.clear-chat:hover {
+  background-color: #e0e0e0;
+}
+
+/* Chat Bubble Button */
+.chat-bubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 65px;
+  height: 65px;
+  background-color: #4A90E2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.3s;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.chat-bubble:hover {
+  background-color: #357ABD;
+  transform: scale(1.1);
+}
+
+.chat-bubble svg {
+  color: white;
+  font-size: 28px;
+}
+
+/* Message Styles */
+.message {
+  max-width: 70%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.user-message {
+  background-color: #4A90E2; /* User message color */
+  color: white;
+  align-self: flex-end;
+  border-radius: 12px 12px 0 12px;
+}
+
+.bot-message {
+  background-color: #E5E5EA; /* Bot message color */
+  color: black;
+  align-self: flex-start;
+  border-radius: 12px 12px 12px 0;
+}
+
+.clear-chat {
+  /* Ensuring no conflicts with global .clear-chat */
+}
+
+.chat-history {
+  /* Ensuring no conflicts with global .chat-history */
+}

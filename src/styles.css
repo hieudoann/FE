@@ -1,0 +1,176 @@
+/* Base styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom right, #e6f7ff, #ffffff);
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  color: #007BFF;
+  text-align: center;
+}
+
+h2 {
+  color: #343a40;
+}
+
+input {
+  border: 1px solid #007BFF;
+  border-radius: 5px;
+  padding: 10px;
+  width: 300px;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.view-button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-button:hover {
+  background-color: #0056b3;
+}
+
+img {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+.user-info {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.user-info p {
+  margin: 5px 0;
+}
+
+.error-message {
+  color: red;
+}
+
+.loading-message {
+  color: #007BFF;
+}
+
+/* Logo styles */
+.logo {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 200px;
+  height: auto;
+}
+
+/* Scrolling text */
+.scrolling-text {
+  position: absolute;
+  white-space: nowrap;
+  animation: scroll 25s linear infinite;
+  font-size: 36px;
+  font-weight: bold;
+  color: rgba(26, 75, 223, 0.9);
+  top: 40px;
+  left: 0;
+  width: 100vw;
+  text-align: center;
+  z-index: -1;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Image logo styles */
+.doctor-logo,
+.tuvan-logo,
+.antoan-logo,
+.giaiphap-logo {
+  position: absolute;
+  height: auto;
+}
+
+.doctor-logo {
+  width: 200px;
+  top: 260px;
+  right: 20px;
+  margin-top: 30px
+}
+
+.tuvan-logo {
+  width: 400px;
+  top: -3px;
+  right: 80px;
+  margin-top: 110px
+}
+
+.antoan-logo {
+  width: 300px;
+  top: 5px;
+  right: 90px;
+  margin-top: 500px;
+} 
+
+.giaiphap-logo {
+  width: 320px;
+  top: 0;
+  right: 230px;
+  margin-top: 290px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) { /* Tablet view */
+  input {
+    width: 100%; /* Full width on tablets */
+  }
+  .logo, .doctor-logo, .tuvan-logo, .antoan-logo, .giaiphap-logo {
+    position: static; /* Reset absolute positioning */
+    margin: 10px auto;
+    display: block;
+    width: 50%; /* Smaller image for tablet view */
+  }
+  .scrolling-text {
+    font-size: 24px; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) { /* Mobile view */
+  input {
+    width: 100%; /* Full width on mobile */
+  }
+  .logo, .doctor-logo, .tuvan-logo, .antoan-logo, .giaiphap-logo {
+    width: 100%;
+    margin: 5px auto;
+  }
+  .scrolling-text {
+    font-size: 18px; /* Further adjust font size */
+  }
+}
