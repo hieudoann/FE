@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './Home.component.css'; // Ensure it's linked to the CSS file
 import Emailjs from 'emailjs-com';
 
 const Home = () => {
-    const sendEmail = (e) => {
-        e.preventDefault();
+    // Create a ref for the form element
+    const formRef = useRef(null);
 
-        Emailjs.sendForm('service_0v9go2o', 'template_idle10o', e.target, '17gSsOM0z8DQNMZQ_')
+    // Function to send email using EmailJS
+    const sendEmail = (form) => {
+        Emailjs.sendForm('service_0v9go2o', 'template_idle10o', form, '17gSsOM0z8DQNMZQ_')
             .then((result) => {
                 console.log(result.text);
                 alert('Message sent successfully!');
@@ -15,7 +17,25 @@ const Home = () => {
                 alert('Failed to send message, please try again.');
             });
 
-        e.target.reset();
+        // Reset the form after sending
+        form.reset();
+    };
+
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        sendEmail(e.target);
+    };
+
+    // Handle key down events in the textarea
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            // Ensure the form ref is available before sending
+            if (formRef.current) {
+                sendEmail(formRef.current);
+            }
+        }
     };
 
     return (
@@ -67,10 +87,16 @@ const Home = () => {
                 {/* Contact Section */}
                 <div className="contact">
                     <h3>Contact Us</h3>
-                    <form onSubmit={sendEmail}>
+                    {/* Attach the ref to the form element */}
+                    <form ref={formRef} onSubmit={handleSubmit}>
                         <input type="text" name="name" placeholder="Your Name" required />
                         <input type="email" name="email" placeholder="Your Email" required />
-                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <textarea
+                            name="message"
+                            placeholder="Your Message"
+                            required
+                            onKeyDown={handleKeyDown}
+                        ></textarea>
                         <button type="submit" className="cta-button">Send Message</button>
                     </form>
                 </div>
