@@ -123,28 +123,42 @@ header nav a:hover {
 /* Products Section */
 .products {
     display: flex;
-    justify-content: center;
+    justify-content: space-around; /* Căn đều khoảng cách giữa các container */
     align-items: center;
     padding: 30px 0;
     background-color: #f0f8ff;
     width: 100%;
 }
 
+/* Center Product (Existing) */
 .product-intro {
-    width: 30%; /* Giảm xuống 50% tổng chiều rộng */
-    height: auto;
+    width: 30%; /* Giảm bớt chiều rộng */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .product-intro img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Chiếm toàn bộ chiều rộng container */
+    height: auto; /* Giữ tỷ lệ ảnh */
+    border-radius: 10px; /* Bo góc ảnh */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng */
 }
 
+/* Side Products (New) */
+.product-side {
+    width: 20%; /* Giảm chiều rộng để cân đối với phần giữa */
+    display: flex;
+    justify-content: center; /* Căn giữa ảnh */
+    align-items: center;
+}
+
+.product-side img {
+    width: 100%; /* Chiếm toàn bộ chiều rộng container */
+    height: auto; /* Giữ tỷ lệ ảnh */
+    border-radius: 10px; /* Bo góc ảnh */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+}
 
 /* Contact & Footer Section */
 .contact-footer {
