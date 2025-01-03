@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './Home.component.css'; // Ensure it's linked to the CSS file
 import Emailjs from 'emailjs-com';
 
 const Home = () => {
-    const sendEmail = (e) => {
-        e.preventDefault();
+    // Create a ref for the form element
+    const formRef = useRef(null);
 
-        Emailjs.sendForm('service_0v9go2o', 'template_w43y2lk', e.target, 'Waf09zcqlehx4xfa6')
+    // Function to send email using EmailJS
+    const sendEmail = (form) => {
+        Emailjs.sendForm('service_0v9go2o', 'template_idle10o', form, '17gSsOM0z8DQNMZQ_')
             .then((result) => {
                 console.log(result.text);
                 alert('Message sent successfully!');
@@ -15,7 +17,25 @@ const Home = () => {
                 alert('Failed to send message, please try again.');
             });
 
-        e.target.reset();
+        // Reset the form after sending
+        form.reset();
+    };
+
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        sendEmail(e.target);
+    };
+
+    // Handle key down events in the textarea
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            // Ensure the form ref is available before sending
+            if (formRef.current) {
+                sendEmail(formRef.current);
+            }
+        }
     };
 
     return (
@@ -36,10 +56,10 @@ const Home = () => {
 
             {/* Hero Section */}
             <section className="hero">
-                <h2>𝙒𝒆𝙡𝒄𝙤𝒎𝙚 𝙩𝒐 𝑯𝙊𝑨𝙉𝑮 𝑷𝙃𝑼𝘾 𝙏𝑯𝘼𝑵𝙃 𝘾𝑶.,𝙇𝙏</h2>
-                <p>𝐘𝐎𝐔𝐑 𝐇𝐄𝐀𝐋𝐓𝐇 𝐎𝐍 𝐘𝐎𝐔𝐑 𝐇𝐀𝐍𝐃 </p>
-                
+                <h2>𝙒𝒆𝙡𝒄𝒐𝒎𝒆 𝙩𝒐 𝑯𝙊𝑨𝙉𝑮 𝑷𝙃𝑼𝘾 𝙏𝘼𝙉𝙃 𝘾𝑶.,𝙇𝙏</h2>
+                <p>𝐘𝐎𝐔𝐑 𝐇𝐄𝐀𝐋𝐓𝐇 𝐎𝐍 𝐘𝐎𝐔𝐑 𝐇𝐀𝐍𝐃</p>
             </section>
+
             {/* Products Section */}
             <section id="products" className="products">
                 {/* Left Product */}
@@ -79,7 +99,7 @@ const Home = () => {
 
             {/* Contact & Footer Section */}
             <div className="contact-footer">
-                {/* Contact Section */}
+            {/* Contact Section */}
                 <section id="contact" className="contact">
                     <h3>Contact Us</h3>
                     <form onSubmit={sendEmail}>
@@ -89,7 +109,6 @@ const Home = () => {
                         <button type="submit" className="cta-button">Send Message</button>
                     </form>
                 </section>
-
                 {/* Footer Section */}
                 <div className="footer">
                     <div className="footer-info">

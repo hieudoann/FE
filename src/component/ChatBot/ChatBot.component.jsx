@@ -15,6 +15,7 @@ const ChatBot = () => {
     setIsChatOpen(!isChatOpen);
   };
 
+  // Initialize your Gemini API
   const genAI = new GoogleGenerativeAI("AIzaSyBW0wuEml-AWB_JGj2xXAbWDH0TQazBC5A");
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
