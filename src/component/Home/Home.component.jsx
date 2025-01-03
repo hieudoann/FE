@@ -3,12 +3,10 @@ import './Home.component.css'; // Ensure it's linked to the CSS file
 import Emailjs from 'emailjs-com';
 
 const Home = () => {
-    // Create a ref for the form element
-    const formRef = useRef(null);
+    const sendEmail = (e) => {
+        e.preventDefault();
 
-    // Function to send email using EmailJS
-    const sendEmail = (form) => {
-        Emailjs.sendForm('service_0v9go2o', 'template_idle10o', form, '17gSsOM0z8DQNMZQ_')
+        Emailjs.sendForm('service_0v9go2o', 'template_w43y2lk', e.target, 'Waf09zcqlehx4xfa6')
             .then((result) => {
                 console.log(result.text);
                 alert('Message sent successfully!');
@@ -17,27 +15,8 @@ const Home = () => {
                 alert('Failed to send message, please try again.');
             });
 
-        // Reset the form after sending
-        form.reset();
+        e.target.reset();
     };
-
-    // Handle form submission
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        sendEmail(e.target);
-    };
-
-    // Handle key down events in the textarea
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            // Ensure the form ref is available before sending
-            if (formRef.current) {
-                sendEmail(formRef.current);
-            }
-        }
-    };
-
     return (
         <div>
             {/* Header */}
@@ -101,7 +80,7 @@ const Home = () => {
             <div className="contact-footer">
             {/* Contact Section */}
                 <section id="contact" className="contact">
-                    <h3>Contact Us</h3>
+                <h3>Contact Us</h3>
                     <form onSubmit={sendEmail}>
                         <input type="text" name="name" placeholder="Your Name" required />
                         <input type="email" name="email" placeholder="Your Email" required />
