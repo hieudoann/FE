@@ -1,46 +1,74 @@
 import React from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import GaugeChart from 'react-gauge-chart';
 
 const Dashboard = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { id } = useParams(); // Get the subLocation ID from URL parameters
-
-  const { subLocation } = location.state || {};
   
+  // Retrieve subLocation data from navigation state
+  const { subLocation } = location.state || {};
+
   if (!subLocation) {
     return <p className="no-data">No sub-location data available.</p>;
   }
 
-  const handleSubLocationClick = () => {
+  const handleBackClick = () => {
     navigate('/map');
   };
 
   return (
     <div className="dashboard">
+      <button className="back-button" onClick={handleBackClick}>Back to Map</button>
       <h2 className="dashboard-title">{subLocation.name} Dashboard</h2>
       <div className="gauge-container">
-        <div className="gauge-card" onClick={handleSubLocationClick}>
+        {/* Temperature */}
+        <div className="gauge-card">
           <GaugeChart
-            id="temp1-gauge"
+            id="temp-gauge"
             nrOfLevels={30}
-            percent={subLocation.nhiet_do1 / 100}
+            percent={subLocation.nhiet_do / 100} // Assuming temperature range is 0-100°C
             textColor="#000"
-            formatTextValue={() => `${subLocation.nhiet_do1}°C`}
+            formatTextValue={() => `${subLocation.nhiet_do}°C`}
           />
-          <p className="gauge-title">Temperature 1</p>
+          <p className="gauge-title">Temperature</p>
         </div>
-        <div className="gauge-card" onClick={handleSubLocationClick}>
+
+        {/* Humidity */}
+        <div className="gauge-card">
           <GaugeChart
-            id="hum1-gauge"
+            id="hum-gauge"
             nrOfLevels={30}
-            percent={subLocation.do_am1 / 100}
+            percent={subLocation.do_am / 100} // Assuming humidity range is 0-100%
             textColor="#000"
-            formatTextValue={() => `${subLocation.do_am1}%`}
+            formatTextValue={() => `${subLocation.do_am}%`}
           />
-          <p className="gauge-title">Humidity 1</p>
+          <p className="gauge-title">Humidity</p>
+        </div>
+
+        {/* Air Quality */}
+        <div className="gauge-card">
+          <GaugeChart
+            id="aq-gauge"
+            nrOfLevels={30}
+            percent={subLocation.cl_kk / 500} // Assuming air quality index range up to 500
+            textColor="#000"
+            formatTextValue={() => `${subLocation.cl_kk}`}
+          />
+          <p className="gauge-title">Air Quality</p>
+        </div>
+
+        {/* Fine Dust */}
+        <div className="gauge-card">
+          <GaugeChart
+            id="dust-gauge"
+            nrOfLevels={30}
+            percent={subLocation.bui_min / 200} // Assuming fine dust range up to 200 µg/m³
+            textColor="#000"
+            formatTextValue={() => `${subLocation.bui_min} µg/m³`}
+          />
+          <p className="gauge-title">Fine Dust</p>
         </div>
       </div>
     </div>

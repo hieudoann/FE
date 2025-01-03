@@ -6,7 +6,6 @@ import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
 import 'leaflet-control-geocoder';
 import { useNavigate } from 'react-router-dom';
 import './Map.component.css';
-// import Cesium from "cesium";
 
 const Map = () => {
   const mapRef = useRef(null);
@@ -26,16 +25,12 @@ const Map = () => {
           name: 'A',
           latitude: 10.810687,
           longitude: 106.71362,
-          nhiet_do1: 25,
-          do_am1: 60,
         },
         {
           id: 2,
           name: 'B',
           latitude: 10.810649,
           longitude: 106.713516,
-          nhiet_do1: 28,
-          do_am1: 63,
         },
       ],
     },
@@ -69,13 +64,35 @@ const Map = () => {
       );
 
       console.log('Fetched data:', data);
+      return data; // Return fetched data for use in subLocation A
     } catch (error) {
       console.error('Error fetching latest location:', error);
+      return null;
     }
   };
 
+  // Function to generate random data for subLocation B
+  const generateRandomData = () => {
+    return {
+      nhiet_do: parseFloat((Math.random() * (40 - 20) + 20).toFixed(2)), // Random temperature between 20°C and 40°C
+      do_am: parseFloat((Math.random() * (80 - 30) + 30).toFixed(2)), // Random humidity between 30% and 80%
+      cl_kk: parseFloat((Math.random() * (500 - 100) + 100).toFixed(2)), // Random air quality index between 100 and 500
+      bui_min: parseFloat((Math.random() * (200 - 50) + 50).toFixed(2)), // Random fine dust between 50 µg/m³ and 200 µg/m³
+      lon: 106.713516, // Fixed longitude for point B
+      lat: 10.810649, // Fixed latitude for point B
+      currentValue: 0,
+      powerValue: 0,
+      lightToggleCount: Math.floor(Math.random() * 10), // Random toggle count between 0 and 10
+      opr_flag: 0,
+      opr_time: "0",
+      created_at: new Date().toISOString(),
+    };
+  };
+
   // Add main markers and circles
-  const addMainMarkers = () => {
+  const addMainMarkers = async () => {
+    const fetchedData = await fetchLatestLocation();
+
     predefinedLocations.forEach((location) => {
       // Add main marker
       const marker = L.marker([location.latitude, location.longitude], { icon: redDotIcon }).addTo(
@@ -97,6 +114,37 @@ const Map = () => {
 
         // Add subMarkers
         location.subLocations.forEach((subLocation) => {
+          let dataToPass = {};
+
+          if (subLocation.name === 'A' && fetchedData) {
+            // Point A uses fetched data
+            dataToPass = {
+              ...fetchedData,
+              name: 'A',
+            };
+          } else if (subLocation.name === 'B') {
+            // Point B uses random data
+            dataToPass = generateRandomData();
+            dataToPass.name = 'B';
+          } else {
+            // Default data if needed
+            dataToPass = {
+              nhiet_do: subLocation.nhiet_do1,
+              do_am: subLocation.do_am1,
+              cl_kk: 0,
+              bui_min: 0,
+              lon: subLocation.longitude,
+              lat: subLocation.latitude,
+              currentValue: 0,
+              powerValue: 0,
+              lightToggleCount: 0,
+              opr_flag: 0,
+              opr_time: "0",
+              created_at: new Date().toISOString(),
+              name: subLocation.name,
+            };
+          }
+
           const subMarker = L.marker([subLocation.latitude, subLocation.longitude], {
             icon: redDotIcon,
           }).addTo(mapInstanceRef.current);
@@ -109,7 +157,7 @@ const Map = () => {
           });
 
           subMarker.on('click', () => {
-            navigate(`/map/dashboard/${subLocation.id}`, { state: { subLocation } });
+            navigate(`/map/dashboard/${subLocation.id}`, { state: { subLocation: dataToPass } });
 
             if (routingControlRef.current) {
               routingControlRef.current.setWaypoints([
@@ -174,9 +222,6 @@ const Map = () => {
         },
       }).addTo(mapInstanceRef.current);
     }
-
-    // Fetch the latest location data when component mounts
-    fetchLatestLocation();
 
     // Set up polling to fetch data periodically (e.g., every 30 seconds)
     const intervalId = setInterval(fetchLatestLocation, 30000); // 30,000 ms = 30 seconds

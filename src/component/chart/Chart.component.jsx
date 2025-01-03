@@ -54,12 +54,12 @@ const BarChartWithFilter = () => {
           backgroundColor: 'rgba(0, 0, 255, 0.8)',
         },
         {
-          label: 'Air Quality (cl_kk)',
+          label: 'Air Quality',
           data: filteredData.map(item => item.cl_kk),
           backgroundColor: 'rgba(255, 165, 0, 0.8)',
         },
         {
-          label: 'Fine Dust (bui_min)',
+          label: 'Fine Dust',
           data: filteredData.map(item => item.bui_min),
           backgroundColor: 'rgba(0, 128, 0, 0.8)',
         },
