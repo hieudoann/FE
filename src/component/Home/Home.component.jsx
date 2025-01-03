@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.component.css'; // Ensure it's linked to the CSS file
 import Emailjs from 'emailjs-com';
 
 const Home = () => {
+    const [mailStatus, setMailStatus] = useState('');
+
     const sendEmail = (e) => {
         e.preventDefault();
 
+        // Xử lý gửi email bằng EmailJS
         Emailjs.sendForm('service_0v9go2o', 'template_w43y2lk', e.target, 'Waf09zcqlehx4xfa6')
             .then((result) => {
                 console.log(result.text);
@@ -15,6 +18,29 @@ const Home = () => {
                 alert('Failed to send message, please try again.');
             });
 
+        // Thu thập dữ liệu name và email từ form
+        const formData = new FormData(e.target);
+        const name = formData.get('name');
+        const email = formData.get('email');
+
+        // Gửi dữ liệu name và email tới backend qua fetch POST request với JSON body
+        fetch("https://iomt.hoangphucthanh.vn/index.php?mail", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setMailStatus(data.message);
+            })
+            .catch(error => {
+                console.error(error);
+                setMailStatus('Failed to send mail info.');
+            });
+
         e.target.reset();
     };
 
@@ -22,20 +48,24 @@ const Home = () => {
         <div>
             {/* Header */}
             <header>
+                <div className="logo-container">
+                    <img src="telemedicine.png" alt="HOPT Logo" className="logo" /> {/* Add your logo image */}
+                </div>
                 <h1>𝑯𝑶𝑷𝑻 𝒄𝒂𝒓𝒆𝒔 𝒇𝒐𝒓 𝒚𝒐𝒖 - 𝒚𝒐𝒖 𝒄𝒂𝒓𝒆 𝒇𝒐𝒓 𝒑𝒂𝒕𝒊𝒆𝒏𝒕𝒔!</h1>
                 <nav>
-                    <a href="#features">Features</a>
+                    <a href="https://hoangphucthanh.vn/" target="_blank" rel="noopener noreferrer" className="logo-link">HOPT</a>
                     <a href="#products">Products</a>
+                    <a href="#features">Features</a>
                     <a href="#contact">Contact</a>
                 </nav>
             </header>
 
             {/* Hero Section */}
             <section className="hero">
-                <h2>𝙒𝒆𝙡𝒄𝙤𝒎𝙚 𝙩𝒐 𝑯𝙊𝑨𝙉𝑮 𝑷𝙃𝑼𝘾 𝙏𝑯𝘼𝑵𝙃 𝘾𝑶.,𝙇𝙏</h2>
-                <p>𝐘𝐎𝐔𝐑 𝐇𝐄𝐀𝐋𝐓𝐇 𝐎𝐍 𝐘𝐎𝐔𝐑 𝐇𝐀𝐍𝐃 </p>
-                
+                <h2>𝙒𝒆𝙡𝒄𝒐𝒎𝒆 𝙩𝒐 𝑯𝙊𝑨𝙉𝑮 𝑷𝙃𝑼𝘾 𝙏𝘼𝙉𝙃 𝘾𝑶.,𝙇𝙏</h2>
+                <p>𝐘𝐎𝐔𝐑 𝐇𝐄𝐀𝐋𝐓𝐇 𝐎𝐍 𝐘𝐎𝐔𝐑 𝐇𝐀𝐍𝐃</p>
             </section>
+
             {/* Products Section */}
             <section id="products" className="products">
                 <div className="product-intro">
@@ -65,7 +95,7 @@ const Home = () => {
             {/* Contact & Footer Section */}
             <div className="contact-footer">
                 {/* Contact Section */}
-                <div className="contact">
+                <div className="contact" id="contact">
                     <h3>Contact Us</h3>
                     <form onSubmit={sendEmail}>
                         <input type="text" name="name" placeholder="Your Name" required />
@@ -73,6 +103,7 @@ const Home = () => {
                         <textarea name="message" placeholder="Your Message" required></textarea>
                         <button type="submit" className="cta-button">Send Message</button>
                     </form>
+                    {mailStatus && <p>{mailStatus}</p>}
                 </div>
 
                 {/* Footer Section */}

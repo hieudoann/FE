@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
@@ -7,26 +7,18 @@ import 'leaflet-control-geocoder';
 import { useNavigate } from 'react-router-dom';
 import './Map.component.css';
 // import Cesium from "cesium";
+
 const Map = () => {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const subMarkersRef = useRef([]);
   const navigate = useNavigate();
-  let routingControl = null;
-
-  // Custom red dot icon
-  const redDotIcon = L.icon({
-    iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32],
-  });
-
-  const predefinedLocations = [
+  const routingControlRef = useRef(null); // Use ref to persist routingControl
+  const [predefinedLocations, setPredefinedLocations] = useState([
     {
       roomId: '62616bb00aa850983c21b11b',
-      latitude: 10.810709,
-      longitude: 106.713334,
+      latitude: 10.810709, // Initial placeholder, will be updated
+      longitude: 106.713334, // Initial placeholder, will be updated
       name: 'HOPT',
       subLocations: [
         {
@@ -47,10 +39,45 @@ const Map = () => {
         },
       ],
     },
-  ];
+  ]);
 
+  // Custom red dot icon
+  const redDotIcon = L.icon({
+    iconUrl: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
+
+  // Function to fetch latest location data
+  const fetchLatestLocation = async () => {
+    try {
+      const response = await fetch('https://iomt.hoangphucthanh.vn/index.php?latest');
+      const data = await response.json();
+      console.log('Maps:', data.lat, data.lon);
+      // Update the main location's latitude and longitude with fetched data
+      setPredefinedLocations((prevLocations) =>
+        prevLocations.map((location) =>
+          location.roomId === '62616bb00aa850983c21b11b'
+            ? {
+                ...location,
+                latitude: data.lat || location.latitude,
+                longitude: data.lon || location.longitude,
+              }
+            : location
+        )
+      );
+
+      console.log('Fetched data:', data);
+    } catch (error) {
+      console.error('Error fetching latest location:', error);
+    }
+  };
+
+  // Add main markers and circles
   const addMainMarkers = () => {
     predefinedLocations.forEach((location) => {
+      // Add main marker
       const marker = L.marker([location.latitude, location.longitude], { icon: redDotIcon }).addTo(
         mapInstanceRef.current
       );
@@ -64,9 +91,11 @@ const Map = () => {
       marker.on('click', () => {
         mapInstanceRef.current.flyTo([location.latitude, location.longitude], 18);
 
+        // Remove existing subMarkers
         subMarkersRef.current.forEach((subMarker) => mapInstanceRef.current.removeLayer(subMarker));
         subMarkersRef.current = [];
 
+        // Add subMarkers
         location.subLocations.forEach((subLocation) => {
           const subMarker = L.marker([subLocation.latitude, subLocation.longitude], {
             icon: redDotIcon,
@@ -82,8 +111,8 @@ const Map = () => {
           subMarker.on('click', () => {
             navigate(`/map/dashboard/${subLocation.id}`, { state: { subLocation } });
 
-            if (routingControl) {
-              routingControl.setWaypoints([
+            if (routingControlRef.current) {
+              routingControlRef.current.setWaypoints([
                 L.latLng(location.latitude, location.longitude),
                 L.latLng(subLocation.latitude, subLocation.longitude),
               ]);
@@ -95,10 +124,26 @@ const Map = () => {
 
         marker.openPopup();
       });
+
+      // Add circle around main marker
+      const circle = L.circle([location.latitude, location.longitude], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.1,
+        radius: 40, // Radius in meters
+      }).addTo(mapInstanceRef.current);
+
+      circle.bindPopup(`
+        <div>
+          <h4>${location.name} Area</h4>
+          <p>Radius: 500 meters</p>
+        </div>
+      `);
     });
   };
 
   useEffect(() => {
+    // Initialize the map only once
     if (!mapInstanceRef.current) {
       mapInstanceRef.current = L.map(mapRef.current).setView([14.0583, 108.2772], 6);
 
@@ -116,7 +161,7 @@ const Map = () => {
       addMainMarkers();
 
       // Add routing control
-      routingControl = L.Routing.control({
+      routingControlRef.current = L.Routing.control({
         waypoints: [],
         routeWhileDragging: true,
         geocoder: L.Control.Geocoder.nominatim(),
@@ -129,7 +174,21 @@ const Map = () => {
         },
       }).addTo(mapInstanceRef.current);
     }
-  }, []);
+
+    // Fetch the latest location data when component mounts
+    fetchLatestLocation();
+
+    // Set up polling to fetch data periodically (e.g., every 30 seconds)
+    const intervalId = setInterval(fetchLatestLocation, 30000); // 30,000 ms = 30 seconds
+
+    return () => {
+      clearInterval(intervalId);
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove(); // Clean up the map instance on unmount
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Removed predefinedLocations from dependency array to prevent re-initialization
 
   return (
     <div className="App">
