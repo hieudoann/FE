@@ -8,7 +8,6 @@ const Home = () => {
     const sendEmail = (e) => {
         e.preventDefault();
 
-        
         // Xử lý gửi email bằng EmailJS
         Emailjs.sendForm('service_0v9go2o', 'template_w43y2lk', e.target, 'Waf09zcqlehx4xfa6')
             .then((result) => {
@@ -50,7 +49,7 @@ const Home = () => {
             {/* Header */}
             <header>
                 <div className="logo-container">
-                    <img src="telemedicine.png" alt="HOPT Logo" className="logo" /> {/* Add your logo image */}
+                    <img src="logo2.png" alt="HOPT Logo" className="logo" /> {/* Add your logo image */}
                 </div>
                 <h1>𝑯𝑶𝑷𝑻 𝒄𝒂𝒓𝒆𝒔 𝒇𝒐𝒓 𝒚𝒐𝒖 - 𝒚𝒐𝒖 𝒄𝒂𝒓𝒆 𝒇𝒐𝒓 𝒑𝒂𝒕𝒊𝒆𝒏𝒕𝒔!</h1>
                 <nav>
@@ -69,8 +68,19 @@ const Home = () => {
 
             {/* Products Section */}
             <section id="products" className="products">
+                {/* Left Product */}
+                <div className="product-side">
+                    <img src="telebox.png" alt="Product 1" />
+                </div>
+                
+                {/* Center Product */}
                 <div className="product-intro">
                     <img src="host.jpg" alt="Product Introduction" />
+                </div>
+                
+                {/* Right Product */}
+                <div className="product-side">
+                    <img src="noisoibox.png" alt="Product 2" />
                 </div>
             </section>
 
@@ -96,7 +106,7 @@ const Home = () => {
             {/* Contact & Footer Section */}
             <div className="contact-footer">
                 {/* Contact Section */}
-                <div className="contact" id="contact">
+                <section id="contact" className="contact" >
                     <h3>Contact Us</h3>
                     <form onSubmit={sendEmail}>
                         <input type="text" name="name" placeholder="Your Name" required />
@@ -105,7 +115,7 @@ const Home = () => {
                         <button type="submit" className="cta-button">Send Message</button>
                     </form>
                     {mailStatus && <p>{mailStatus}</p>}
-                </div>
+                </section>
 
                 {/* Footer Section */}
                 <div className="footer">
