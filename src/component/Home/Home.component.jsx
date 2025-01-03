@@ -3,18 +3,13 @@ import './Home.component.css'; // Ensure it's linked to the CSS file
 import Emailjs from 'emailjs-com';
 
 const Home = () => {
-<<<<<<< HEAD
-    const sendEmail = (e) => {
-        e.preventDefault();
-
-=======
     const [mailStatus, setMailStatus] = useState('');
 
     const sendEmail = (e) => {
         e.preventDefault();
 
+        
         // Xử lý gửi email bằng EmailJS
->>>>>>> 2d9156da265882d5d130e433a546552cc7a1233c
         Emailjs.sendForm('service_0v9go2o', 'template_w43y2lk', e.target, 'Waf09zcqlehx4xfa6')
             .then((result) => {
                 console.log(result.text);
@@ -24,10 +19,6 @@ const Home = () => {
                 alert('Failed to send message, please try again.');
             });
 
-<<<<<<< HEAD
-        e.target.reset();
-    };
-=======
         // Thu thập dữ liệu name và email từ form
         const formData = new FormData(e.target);
         const name = formData.get('name');
@@ -54,7 +45,6 @@ const Home = () => {
         e.target.reset();
     };
 
->>>>>>> 2d9156da265882d5d130e433a546552cc7a1233c
     return (
         <div>
             {/* Header */}
@@ -105,15 +95,9 @@ const Home = () => {
 
             {/* Contact & Footer Section */}
             <div className="contact-footer">
-<<<<<<< HEAD
-            {/* Contact Section */}
-                <section id="contact" className="contact">
-                <h3>Contact Us</h3>
-=======
                 {/* Contact Section */}
                 <div className="contact" id="contact">
                     <h3>Contact Us</h3>
->>>>>>> 2d9156da265882d5d130e433a546552cc7a1233c
                     <form onSubmit={sendEmail}>
                         <input type="text" name="name" placeholder="Your Name" required />
                         <input type="email" name="email" placeholder="Your Email" required />
