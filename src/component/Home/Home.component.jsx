@@ -1,11 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import './Home.component.css'; // Ensure it's linked to the CSS file
 import Emailjs from 'emailjs-com';
 
 const Home = () => {
+<<<<<<< HEAD
     const sendEmail = (e) => {
         e.preventDefault();
 
+=======
+    const [mailStatus, setMailStatus] = useState('');
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        // Xử lý gửi email bằng EmailJS
+>>>>>>> 2d9156da265882d5d130e433a546552cc7a1233c
         Emailjs.sendForm('service_0v9go2o', 'template_w43y2lk', e.target, 'Waf09zcqlehx4xfa6')
             .then((result) => {
                 console.log(result.text);
@@ -15,14 +24,43 @@ const Home = () => {
                 alert('Failed to send message, please try again.');
             });
 
+<<<<<<< HEAD
         e.target.reset();
     };
+=======
+        // Thu thập dữ liệu name và email từ form
+        const formData = new FormData(e.target);
+        const name = formData.get('name');
+        const email = formData.get('email');
+
+        // Gửi dữ liệu name và email tới backend qua fetch POST request với JSON body
+        fetch("https://iomt.hoangphucthanh.vn/index.php?mail", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setMailStatus(data.message);
+            })
+            .catch(error => {
+                console.error(error);
+                setMailStatus('Failed to send mail info.');
+            });
+
+        e.target.reset();
+    };
+
+>>>>>>> 2d9156da265882d5d130e433a546552cc7a1233c
     return (
         <div>
             {/* Header */}
             <header>
                 <div className="logo-container">
-                    <img src="logo2.png" alt="HOPT Logo" className="logo" /> {/* Add your logo image */}
+                    <img src="telemedicine.png" alt="HOPT Logo" className="logo" /> {/* Add your logo image */}
                 </div>
                 <h1>𝑯𝑶𝑷𝑻 𝒄𝒂𝒓𝒆𝒔 𝒇𝒐𝒓 𝒚𝒐𝒖 - 𝒚𝒐𝒖 𝒄𝒂𝒓𝒆 𝒇𝒐𝒓 𝒑𝒂𝒕𝒊𝒆𝒏𝒕𝒔!</h1>
                 <nav>
@@ -41,19 +79,8 @@ const Home = () => {
 
             {/* Products Section */}
             <section id="products" className="products">
-                {/* Left Product */}
-                <div className="product-side">
-                    <img src="telebox.png" alt="Product 1" />
-                </div>
-                
-                {/* Center Product */}
                 <div className="product-intro">
                     <img src="host.jpg" alt="Product Introduction" />
-                </div>
-                
-                {/* Right Product */}
-                <div className="product-side">
-                    <img src="noisoibox.png" alt="Product 2" />
                 </div>
             </section>
 
@@ -78,16 +105,24 @@ const Home = () => {
 
             {/* Contact & Footer Section */}
             <div className="contact-footer">
+<<<<<<< HEAD
             {/* Contact Section */}
                 <section id="contact" className="contact">
                 <h3>Contact Us</h3>
+=======
+                {/* Contact Section */}
+                <div className="contact" id="contact">
+                    <h3>Contact Us</h3>
+>>>>>>> 2d9156da265882d5d130e433a546552cc7a1233c
                     <form onSubmit={sendEmail}>
                         <input type="text" name="name" placeholder="Your Name" required />
                         <input type="email" name="email" placeholder="Your Email" required />
                         <textarea name="message" placeholder="Your Message" required></textarea>
                         <button type="submit" className="cta-button">Send Message</button>
                     </form>
-                </section>
+                    {mailStatus && <p>{mailStatus}</p>}
+                </div>
+
                 {/* Footer Section */}
                 <div className="footer">
                     <div className="footer-info">
